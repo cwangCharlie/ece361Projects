@@ -1,0 +1,23 @@
+Jianyang Wu 1002925347
+Yuanpeng Wang 1002991060
+
+Part 1 
+1.1 
+
+Q1: Do you observe any successful pings
+	No. all pings seem to have failed. Appears that destination host is unreachable. All data transmission has failed
+
+Q2:it shows NXST_FLOW reply (xid=0x4)
+
+Q3: now that the dump process shows the duration time of transfer and the result of the corresponding ports 
+
+Q4: now that the transfers are successful. Because now that the h1 can find the destination host from the router(the path from h1 to h2 has been built). Therefore, the transmission will be successful. 
+
+1.2
+Q5: a new connection is added under NXST_Flow This line shows the destiation addresses cookie=0x0, duration=12.985s, table=0, n_packets=0, n_bytes=0, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:51
+
+The controller added the flows into the server, which didn't exist before. This addition results in the processing flows afterwards. 
+
+Q6 The controller doesn't seem to make an impact to the status of the program. However the duration time seems to be longer if the controller is in use. The controller is still taking the time to process. 
+
+

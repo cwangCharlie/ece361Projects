@@ -1,0 +1,17 @@
+ECE361 Lab 3
+
+Jianyang Wu 10029253247
+yuanpeng wang 1002991060
+
+Entire Transmission Time = time after receiving acknowledgement - time before sending
+
+We tried to send 5 bytes and 9 bytes and obtained 2 Transmission Times. 
+Transmission rate = (Transmission Time of 9 bytes - Transmission Time of 5 bytes) / (9 - 5) bytes
+
+Frame Delay of 5 bytes = Trnasmission rate * Frame size = 1000 bits / sec
+
+Propagation delay = (Entire Transmission Time - 2 * Frame Delay) / 2
+
+sim1.o and sim3.o have a similar transmission time under the same size of message.
+
+the transmission time of sim2.o is 4 times of sim1.o

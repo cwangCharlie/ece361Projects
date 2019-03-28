@@ -1,0 +1,151 @@
+Yuanpeng Wang, 1002991060
+Jianyang Wu, 1002925347
+
+
+
+
+1. Briefly describe how ping uses ICMP to find out about IP hosts and the
+information that it collects.
+	ping  uses the ICMP protocol's mandatory ECHO_REQUEST datagram to elicit an ICMP ECHO_RESPONSE from a host
+    or gateway. The host name will be entered and connected as the ECHO_REQUEST datagrams have an IP and ICMP 	    	header. 
+
+2. Briefly describe how traceroute uses UDP and ICMP together to determine a
+route to a specified host.
+
+	This program attempts to trace the route an IP packet would follow to  some  internet  host  by  launching
+    probe  packets  with  a  small  ttl (time to live) then listening for an ICMP "time exceeded" reply from a
+    gateway. Some of the methods used could be UDP, ICMP and TCP. We do not want the destination port to use UDP
+	probe packets, as this process will set the destination port to a unlikely value
+
+3. Use ping to find values for minimum, average and maximum round trip time to
+www.utoronto.ca. Compare this to the min/avg/max round trip time to
+www.163.com (free e-mail service in China). What causes the difference in
+round trip time to the two servers?
+
+	www.utoronto.ca: 
+		60 packets transmitted, 60 received, 0% packet loss, time 59349ms
+		rtt min/avg/max/mdev = 0.783/1.426/12.631/1.741 ms
+
+
+	www.163.com:
+		60 packets transmitted, 60 received, 0% packet loss, time 78120ms
+		rtt min/avg/max/mdev = 20.833/22.683/46.586/3.434 ms
+
+
+	Some of the difference might be caused by the firewalls in China. However, the difference in distance would 	also play an important role in the time aspect. However, it seems like this server is in California, 		 		Therefore, it's faster than the ones in UK
+
+4. The distance from Toronto to China is approximately 10,000 km. If light
+travels at 3x10^8 m/s what is the approximate minimum round trip time from
+your machine to www.163.com? Compare this to the average round trip time
+found in question 1. Explain your findings.
+
+	20000km / 3x10^8m/s = 0.0667s
+
+	The difference in average time is about 20.6s based on the data above. This could be a result of firewalls 		being in place for China's internet. As the security checks will take time to process each pockets sent.
+
+5. Estimate the round trip ping time to www.bbc.co.uk (British News site)?
+	The distance from Toronto to UK is approximatly 5600KM
+	Assume the speed of light is 3x10^8m/s. The time used should be roughly 0.040s longer than the toronto time.
+ 
+6. Find the actual round trip ping time to www.bbc.co.uk and compare it to your
+estimate. Explain your findings.
+	60 packets transmitted, 60 received, 0% packet loss, time 59064ms
+	rtt min/avg/max/mdev = 77.954/78.399/80.821/0.534 ms
+	
+	The estimated time it takes is 0.041s or 41ms. However, the actual time is roughly 78 ms. 
+	The routing path from Toronto to UK might have gone through many different DNS servers. This makes the direct route calcuation inaccurate than the actual performance. 
+
+
+7. Find the option in ping which lets you change the packet size. Now ping a
+machine with 10 byte packets and repeat for 10,000 byte packets and
+compare the round trip times.
+	
+	16 packets transmitted, 16 received, 0% packet loss, time 15025ms
+	rtt min/avg/max/mdev = 23.101/23.916/25.233/0.541 ms
+
+	16 packets transmitted, 16 received, 0% packet loss, time 15024ms
+	rtt min/avg/max/mdev = 21.733/22.029/22.784/0.326 ms
+
+
+
+8. What is the default packet size for ping?
+
+	56 without the ICMP header. 64 bytes with the header attached 
+
+9. Issue the following command to find the server hosting the Harvard website:
+nslookup www.harvard.com
+● The first part of the response informs you which DNS server handled your
+request
+● The second part informs you of the IP address corresponding to the
+domain you queried
+● What is the IP address of the DNS server you queried and what is the IP
+address of the server hosting www.harvard.com?
+
+	Server:		128.100.13.50
+	Address:	128.100.13.50#53
+
+	Non-authoritative answer:
+	www.harvard.com	canonical name = harvard.com.
+	Name:	harvard.com
+	Address: 64.64.9.47
+
+	The IP address is 128.100.13.50
+	The server hosting it is 64.64.9.47
+
+
+10. Use the traceroute command to find the # of hops to the DNS server and web
+server you found in question #2. What is the reason for the difference in
+number of hops? Is the DNS server likely a Local Name Server or a Root Name
+Server?
+`	The local serve has stored the routes in cache after the first time it's traceroute
+
+	13 hops
+	10 hops
+	DNS is a Local name server
+ 1  sf-cad.ece.toronto.edu (128.100.13.254)  0.845 ms  1.809 ms  1.796 ms
+
+
+11. Use the command: netstat --tcp to find the number of active TCP
+connections on your machine.
+	20 active connections
+
+12. Open a browser and connect to www.cnn.com. Now issue the same
+command as in question 11 and find the TCP entry corresponding to your new
+http session. Explain your findings.
+
+	tcp        0      0 ug160.eecg.toront:54958 cnn.com.102.122.2:https ESTABLISHED
+	uses http to connect with cnn.com through tcp protocal 
+
+13. Use the command: netstat --statistics to answer the following
+questions:
+a) How many ICMP echo requests did your machine receive?
+	23
+b) How many ICMP echo replies did your machine send?
+	443
+c) How many UDP packets to unknown ports did your machine receive?
+	104
+
+
+
+14. Use the command: ip addr to find the Ethernet address and IP address of
+your machine. What are the addresses?
+	
+	IP address: 128.100.13.160/24
+	Ethernet: 98:90:96:ca:7a:6c
+
+15. Perform an nslookup on the IP address of your machine to determine the
+hostname of your machine. What is the hostname?
+	ug160.eecg.toronto.edu
+	
+
+16. Use the command: ip route show to inspect the local routing table. There
+should be two entries. Explain what each of the entries means.
+
+	default via 128.100.13.254 dev eno1 
+	128.100.13.0/24 dev eno1 proto kernel 
+	scope link src 128.100.13.167 
+
+The first entry is the router address
+The second entry represents the network address
+The last value is the machine server address. 
+

@@ -1,0 +1,7 @@
+Yuanpeng Wang, 1002991060
+Jianyang Wu, 1002925347
+The use of server in client communication, in comparison to creating new socket between clients, simplifies the handshake method of the creating a TCP connection. In contrast, building a socket for each client provides more privacy and security for the users. 
+
+The concurrency of the server is implemented through the use of select. This mechanisms provides the power to monitor serveral sockets at the same time. 
+
+The concurrency of the server is implemented through the use of multithreads. We create a thread for receiving messages from the server and the main thread is responsible for sending messages.
